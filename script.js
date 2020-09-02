@@ -1,87 +1,94 @@
 var button = document.getElementById("enter");
 var input = document.getElementById("userinput");
 var ul = document.querySelector("ul");
+var checkbox = document.querySelectorAll(".checkbox")
 var li = document.querySelectorAll("li")
-var div = document.querySelectorAll(".item");
-var removeList = document.querySelectorAll(".removeList")
+var item = document.querySelectorAll(".item")
+var deleteButton = document.querySelectorAll(".delete")
 
+function updateInput()	{
+	return checkbox = document.querySelectorAll(".checkbox");
+}
 
-// Make the "delete" button work
+function updateLi()	{
+	return li = document.querySelectorAll("li");
+}
+
+function updateItem()	{
+	return item = document.querySelectorAll(".item");
+}
+
+function updateDelete()	{
+	return deleteButton = document.querySelectorAll(".delete");
+}
+
+function	updateAll()	{
+	updateDelete();
+	updateInput();
+	updateItem();
+	updateLi();
+	deleteList();
+	toggleList();
+}
+
 function deleteList()	{
-	for (let i = 0; i < removeList.length; i++) {
-		removeList[i].addEventListener("click", function()	{
-			div[i].remove();
-		});
+	for (let i = 0; i < deleteButton.length; i++) {
+		deleteButton[i].addEventListener("click", removeList);
 	}
 }
 
-// click a li to toggle
-function	toggleList()	{
-	for (let i = 0; i < li.length; i++) {
-		li[i].addEventListener("click", toggle);
+function removeList()	{
+	this.parentNode.remove();
+}
+
+function toggleList()	{
+	for (let i = 0; i < checkbox.length; i++) {
+		checkbox[i].addEventListener("click", toggle);
 	}
 }
 
 function toggle()	{
-	this.classList.toggle("done");
+	this.parentNode.children[1].classList.toggle("done");
 }
 
-//Function to update data and functionality
-function updateLengthAndFunctions()	{
-	divLength();
-	liLength();
-	removeLength();
-	toggleList();
-	deleteList();
-}
-//Created functions to update functionality to newly added li
-function divLength()	{
-	return div = document.querySelectorAll(".item");
-}
-
-function liLength()	{
-	return li = document.querySelectorAll("li");
-}
-
-function  removeLength()	{
-	return removeList = document.querySelectorAll(".removeList");
-}
-
-//Default code 
 function inputLength() {
 	return input.value.length;
 }
 
 function createListElement() {
 	var div = document.createElement("div");
-	var deleteButton = document.createElement("button");
+	var createCheck = document.createElement("input");
+	var createDelete = document.createElement("button");
 	var li = document.createElement("li");
 	div.classList.add("item");
-	deleteButton.classList.add("removeList");
-	li.appendChild(document.createTextNode(input.value));
-	ul.appendChild(div);
+	createCheck.classList.add("checkbox");
+	createDelete.classList.add("delete");
+	createCheck.type = "checkbox";
+	div.appendChild(createCheck);
 	div.appendChild(li);
-	div.appendChild(deleteButton);
-	deleteButton.appendChild(document.createTextNode("Delete"));
+	div.appendChild(createDelete);
+	li.appendChild(document.createTextNode(input.value));
+	createDelete.appendChild(document.createTextNode("Delete"));
+	ul.appendChild(div);
 	input.value = "";
 }
 
 function addListAfterClick() {
 	if (inputLength() > 0) {
 		createListElement();
-		updateLengthAndFunctions();
+		updateAll();
 	}
 }
 
 function addListAfterKeypress(event) {
 	if (inputLength() > 0 && event.keyCode === 13) {
 		createListElement();
-		updateLengthAndFunctions();
+		updateAll();
 	}
 }
 
 button.addEventListener("click", addListAfterClick);
+
 input.addEventListener("keypress", addListAfterKeypress);
 
-toggleList();
-deleteList();
+updateAll();
