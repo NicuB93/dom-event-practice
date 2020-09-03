@@ -8,7 +8,7 @@ body  {
 .background-todo {
   width: 100%;
   height: 100%;
-  background: radial-gradient(circle, rgba(0,0,0,0.6021875) 40%, rgba(0,0,0,0.5221875) 89%), url(./to-do-lists-toolshero.jpg);
+  background: radial-gradient(circle, rgba(0,0,0,0.6021875) 40%, rgba(0,0,0,0.5221875) 89%), url(to-do-lists-toolshero.jpg);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
